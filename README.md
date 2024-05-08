@@ -1,22 +1,24 @@
-Ex-1-NFA-to-DFA
-Exercise 1 - Conversion of Non-Deterministic Finite Automaton (NFA) To Deterministic Finite Automaton (DFA)
-Date: 07.02.24
-REGISTER NUMBER: 212221040055
-Aim
-To write a C program for Conversion of Non-Deterministic Finite Automaton (NFA) To Deterministic Finite Automaton (DFA).
 
-ALGORITHM
-Step 1 : Take ∈ closure for the beginning state of NFA as beginning state of DFA.
+# Ex-1-NFA-to-DFA
+# Exercise 1 - Conversion of Non-Deterministic Finite Automaton (NFA) To Deterministic Finite Automaton (DFA)
 
-Step 2 : Find the states that can be traversed from the present for each input symbol (union of transition value and their closures for each states of NFA present in current state of DFA).
+# Date: 16:02:2024
+## Aim
+To write a C program for Conversion of Non-Deterministic Finite Automaton (NFA) To 
+Deterministic Finite Automaton (DFA).
+# ALGORITHM
+Step 1 : Take ∈ closure for the beginning state of NFA as beginning state of DFA. 
 
-Step 3 : If any new state is found take it as current state and repeat step 2.
+Step 2 : Find the states that can be traversed from the present for each input symbol (union of 
+transition value and their closures for each states of NFA present in current state of DFA). 
 
-Step 4 : Do repeat Step 2 and Step 3 until no new state present in DFA transition table.
+Step 3 : If any new state is found take it as current state and repeat step 2. 
+
+Step 4 : Do repeat Step 2 and Step 3 until no new state present in DFA transition table. 
 
 Step 5 : Mark the states of DFA which contains final state of NFA as final states of DFA.
-
-PROGRAM
+# PROGRAM
+```
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -32,7 +34,6 @@ struct DFA {
 } dfa;
 int last_index = 0;
 FILE *fp;
- 
 int symbols;
 /* reset the hash map*/
 void reset(int ar[], int size) {
@@ -69,7 +70,6 @@ void state(int ar[], int size, char S[]) {
  S[k] = '\0';
 }
 // To pick the next closure from closure set
-
 int closure(int ar[], int size) {
  int i;
  // check new closure is present or not
@@ -107,8 +107,7 @@ void Display_closure(int states, int closure_ar[],
  // till closure get completely saturated
  while (z != 100)
  {
- 
- if (strcmp(&NFA_TABLE[z][symbols], "-") != 0) {
+if (strcmp(&NFA_TABLE[z][symbols], "-") != 0) {
  strcpy(buffer, &NFA_TABLE[z][symbols]);
  // call the check function
  check(closure_ar, buffer);
@@ -145,8 +144,7 @@ int new_states(struct DFA *dfa, char S[]) {
 // Transition function from NFA to DFA
 // (generally union of closure operation )
 void trans(char S[], int M, char *clsr_t[], int st,
- 
- char *NFT[][symbols + 1], char TB[]) {
+char *NFT[][symbols + 1], char TB[]) {
  int len = strlen(S);
  int i, j, k, g;
  int arr[st];
@@ -185,8 +183,7 @@ void Display_DFA(int last_index, struct DFA *dfa_states,
  printf("\n STATES OF DFA :\t\t");
  for (i = 1; i < last_index; i++)
  printf("%s, ", &dfa_states[i].states);
- 
- printf("\n");
+printf("\n");
  printf("\n GIVEN SYMBOLS FOR DFA: \t");
  for (i = 0; i < symbols; i++)
  printf("%d, ", i);
@@ -221,8 +218,7 @@ int main() {
  printf("%d, ", i);
  printf("eps");
  printf("\n\n");
-
- char *NFA_TABLE[states][symbols + 1];
+char *NFA_TABLE[states][symbols + 1];
  // Hard coded input for NFA table
  char *DFA_TABLE[MAX_LEN][symbols];
  strcpy(&NFA_TABLE[0][0], "FC");
@@ -266,7 +262,6 @@ int main() {
  strcpy(buffer, &closure_table[0]);
  strcpy(&dfa_states[last_index++].states, buffer);
  int Sm = 1, ind = 1;
-
  int start_index = 1;
  // Filling up the DFA table with transition values
  // Till new states can be entered in DFA table
@@ -289,10 +284,9 @@ int main() {
  Display_DFA(last_index, dfa_states, DFA_TABLE);
  return 0;
 }
+```
+# OUTPUT 
+![image](https://github.com/premalatha-sureshbabu/Ex-1-NFA-to-DFA/assets/120620842/f5607de6-6fef-4c00-8153-3f5503a7b499)
 
-
-OUTPUT
-image
-
-RESULT
+# RESULT
 The program was sucessfully converted from NFA to DFA.
